@@ -1,0 +1,29 @@
+# Import necessary libraries
+import pandas as pd
+from textblob import TextBlob
+
+# Load the Excel file
+file_path = 'Reviews_Data.csv'  # Update the file path if needed
+data = pd.read_csv(file_path)
+
+# Check the structure of the data
+print(data.head())
+
+# Function to perform sentiment analysis
+def get_sentiment(text):
+    analysis = TextBlob(text)
+    # Classify sentiment based on polarity
+    if analysis.sentiment.polarity > 0:
+        return "Positive"
+    elif analysis.sentiment.polarity == 0:
+        return "Neutral"
+    else:
+        return "Negative"
+
+# Apply sentiment analysis to the "Review" column
+data['Sentiment'] = data['Review'].apply(get_sentiment)
+
+# Save the results to a new Excel file
+output_file_path = 'Reviews_Sentiment_Analysis.xlsx'
+data.to_excel(output_file_path, index=False)
+print(f"Sentiment analysis completed and saved to {output_file_path}")
