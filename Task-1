@@ -23,7 +23,7 @@ def get_sentiment(text):
 # Apply sentiment analysis to the "Review" column
 data['Sentiment'] = data['Review'].apply(get_sentiment)
 
-# Save the results to a new Excel file
-output_file_path = 'Reviews_Sentiment_Analysis.xlsx'
-data.to_excel(output_file_path, index=False)
-print(f"Sentiment analysis completed and saved to {output_file_path}")
+# Save the processed dataset
+output_path = 'processed_sentiment_dataset.csv'  # Save to the current directory or adjust the path as needed
+data.to_csv(output_path, index=False)
+print(f"Processed data saved to {output_path}")
